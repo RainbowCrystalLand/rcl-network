@@ -50,10 +50,10 @@ class Community(RCL):
 class CommunityExperience(models.Model):
     ## FIELDS ##
     user = models.ForeignKey(
-        Community, verbose_name=_('user'),
+        get_user_model(), verbose_name=_('user'),
         related_name='community_experiences')
     community = models.ForeignKey(
         Community, verbose_name=_('community'),
         related_name='user_experiences')
-    rating = models.PositiveSmallIntegerField(_('rating'))
+    rating = models.PositiveSmallIntegerField(_('rating'), default=0)
     comment = models.TextField(_('comment'))

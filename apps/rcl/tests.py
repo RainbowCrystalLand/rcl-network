@@ -1,13 +1,19 @@
 from django.test import TestCase
 # models
-from rcl.models import Community
+from rcl.models import Community, CommunityExperience
+from users.models import User
 # exceptions
 from django.db import IntegrityError
 
 
 class ClassTest(TestCase):
     def setUp(self):
-        pass
+        u = User(email='test@test.com')
+        u.save()
+        self.user = u
+        c = Community(url_name='test-url-setup')
+        c.save()
+        self.community = c
 
     def test_community_creation_minimum_info(self):
         """
@@ -32,3 +38,7 @@ class ClassTest(TestCase):
             c.save()
         except IntegrityError:
             pass
+
+    def test_community_experience(self):
+        ce = CommunityExperience(user=self.user, community=self.community)
+        ce.save()
