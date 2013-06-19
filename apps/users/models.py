@@ -24,6 +24,8 @@ class UserManager(BaseUserManager):
         Creates and saves a User with the given email and password.
         """
         now = timezone.now()
+        if not email:
+            raise ValueError(_('The given email must be set'))
         email = UserManager.normalize_email(email)
         user = self.model(email=email,
                           is_staff=False, is_active=True, is_superuser=False,
@@ -50,11 +52,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     network.
     """
     ## FIELDS ##
-    # fields know from older versions of Django auth User
-    username = models.CharField(_('username'), max_length=55)
+    email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
-    email = models.EmailField(_('email address'), unique=True, blank=True)
     is_staff = models.BooleanField(
         _('staff status'), default=False, help_text=_(
             'Designates whether the user can log into this admin site.'))
@@ -63,7 +63,6 @@ class User(AbstractBaseUser, PermissionsMixin):
             'Designates whether this user should be treated as '
             'active. Unselect this instead of deleting accounts.'))
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
-    # extra fields
     biography = models.TextField(_('biography'))
 
     ## Managers ##
@@ -74,7 +73,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     # https://docs.djangoproject.com/en/dev/topics/auth/customizing
     # /#django.contrib.auth.models.CustomUser.USERNAME_FIELD
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
 
     ## CLASSES AND METHODS ##
     class Meta:
@@ -82,7 +80,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = _('users')
 
     def get_absolute_url(self):
-        return "/users/%s/" % urlquote(self.username)
+        return "/users/%s/" % urlquote(self.pk)
 
     def get_full_name(self):
         """

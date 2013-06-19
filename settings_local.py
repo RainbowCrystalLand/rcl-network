@@ -15,5 +15,5 @@ DATABASES = {
     }
 }
 
-# Our custom User model (replaces Django auth User)
-AUTH_USER_MODEL = 'users.User'
+MEDIA_URL = ''
+STATIC_ROOT = ''
