@@ -1,5 +1,10 @@
 # Django settings for rcl-network project.
 
+import os.path
+import sys
+PROJECT_ROOT = os.path.normpath(os.path.dirname(__file__))
+sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -115,6 +120,7 @@ INSTALLED_APPS = (
     'bootstrap_toolkit',
     # Internal apps
     'users',
+    'rcl',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -145,3 +151,6 @@ LOGGING = {
         },
     }
 }
+
+# Our custom User model (replaces Django auth User)
+AUTH_USER_MODEL = 'users.User'
