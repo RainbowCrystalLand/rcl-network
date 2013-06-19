@@ -41,3 +41,19 @@ class Community(RCL):
     url_name = models.SlugField(
         _('url name'), max_length=127, unique=True, db_index=True)
     datetime_joined = models.DateTimeField(auto_now_add=True)
+
+    ## METHODS ##
+    def __unicode__(self):
+        return u'%s' % self.name
+
+
+class CommunityExperience(models.Model):
+    ## FIELDS ##
+    user = models.ForeignKey(
+        Community, verbose_name=_('user'),
+        related_name='community_experiences')
+    community = models.ForeignKey(
+        Community, verbose_name=_('community'),
+        related_name='user_experiences')
+    rating = models.PositiveSmallIntegerField(_('rating'))
+    comment = models.TextField(_('comment'))
