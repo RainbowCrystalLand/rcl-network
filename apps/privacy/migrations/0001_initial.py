@@ -8,41 +8,36 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Community'
-        db.create_table(u'rcl_community', (
+        # Adding model 'PrivacyLevel'
+        db.create_table(u'privacy_privacylevel', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('location', self.gf('django.db.models.fields.TextField')()),
-            ('description', self.gf('django.db.models.fields.TextField')()),
-            ('internet_focalizer', self.gf('django.db.models.fields.related.ForeignKey')(related_name='internet_focalizers', null=True, to=orm['users.User'])),
-            ('observer', self.gf('django.db.models.fields.related.ForeignKey')(related_name='observers', null=True, to=orm['users.User'])),
-            ('privacy_settings', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['privacy.RCLPrivacySetting'], unique=True, blank=True)),
-            ('kind', self.gf('django.db.models.fields.CharField')(max_length=15)),
-            ('max_capacity', self.gf('django.db.models.fields.PositiveIntegerField')(null=True)),
-            ('current_residents_amount', self.gf('django.db.models.fields.PositiveIntegerField')(null=True)),
-            ('needs_people', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('url_name', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=127)),
-            ('datetime_joined', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=31)),
+            ('level', self.gf('django.db.models.fields.PositiveIntegerField')(unique=True)),
+            ('creator', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['users.User'], blank=True)),
+            ('datetime_created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
         ))
-        db.send_create_signal(u'rcl', ['Community'])
+        db.send_create_signal(u'privacy', ['PrivacyLevel'])
 
-        # Adding model 'CommunityExperience'
-        db.create_table(u'rcl_communityexperience', (
+        # Adding model 'RCLPrivacySetting'
+        db.create_table(u'privacy_rclprivacysetting', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(related_name='community_experiences', to=orm['users.User'])),
-            ('community', self.gf('django.db.models.fields.related.ForeignKey')(related_name='user_experiences', to=orm['rcl.Community'])),
-            ('rating', self.gf('django.db.models.fields.PositiveSmallIntegerField')(default=0)),
-            ('comment', self.gf('django.db.models.fields.TextField')()),
+            ('location_privacy', self.gf('django.db.models.fields.related.ForeignKey')(related_name='location_settings_applied', null=True, to=orm['privacy.PrivacyLevel'])),
+            ('photos_privacy', self.gf('django.db.models.fields.related.ForeignKey')(related_name='photos_settings_applied', null=True, to=orm['privacy.PrivacyLevel'])),
+            ('residents_privacy', self.gf('django.db.models.fields.related.ForeignKey')(related_name='residents_settings_applied', null=True, to=orm['privacy.PrivacyLevel'])),
+            ('calendar_privacy', self.gf('django.db.models.fields.related.ForeignKey')(related_name='calendar_settings_applied', null=True, to=orm['privacy.PrivacyLevel'])),
+            ('projects_privacy', self.gf('django.db.models.fields.related.ForeignKey')(related_name='projects_settings_applied', null=True, to=orm['privacy.PrivacyLevel'])),
+            ('experiences_privacy', self.gf('django.db.models.fields.related.ForeignKey')(related_name='exoeriences_settings_applied', null=True, to=orm['privacy.PrivacyLevel'])),
+            ('donations_privacy', self.gf('django.db.models.fields.related.ForeignKey')(related_name='donations_settings_applied', null=True, to=orm['privacy.PrivacyLevel'])),
         ))
-        db.send_create_signal(u'rcl', ['CommunityExperience'])
+        db.send_create_signal(u'privacy', ['RCLPrivacySetting'])
 
 
     def backwards(self, orm):
-        # Deleting model 'Community'
-        db.delete_table(u'rcl_community')
+        # Deleting model 'PrivacyLevel'
+        db.delete_table(u'privacy_privacylevel')
 
-        # Deleting model 'CommunityExperience'
-        db.delete_table(u'rcl_communityexperience')
+        # Deleting model 'RCLPrivacySetting'
+        db.delete_table(u'privacy_rclprivacysetting')
 
 
     models = {
@@ -85,30 +80,6 @@ class Migration(SchemaMigration):
             'projects_privacy': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'projects_settings_applied'", 'null': 'True', 'to': u"orm['privacy.PrivacyLevel']"}),
             'residents_privacy': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'residents_settings_applied'", 'null': 'True', 'to': u"orm['privacy.PrivacyLevel']"})
         },
-        u'rcl.community': {
-            'Meta': {'object_name': 'Community'},
-            'current_residents_amount': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True'}),
-            'datetime_joined': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'description': ('django.db.models.fields.TextField', [], {}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'internet_focalizer': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'internet_focalizers'", 'null': 'True', 'to': u"orm['users.User']"}),
-            'kind': ('django.db.models.fields.CharField', [], {'max_length': '15'}),
-            'location': ('django.db.models.fields.TextField', [], {}),
-            'max_capacity': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'needs_people': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'observer': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'observers'", 'null': 'True', 'to': u"orm['users.User']"}),
-            'privacy_settings': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['privacy.RCLPrivacySetting']", 'unique': 'True', 'blank': 'True'}),
-            'url_name': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '127'})
-        },
-        u'rcl.communityexperience': {
-            'Meta': {'object_name': 'CommunityExperience'},
-            'comment': ('django.db.models.fields.TextField', [], {}),
-            'community': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'user_experiences'", 'to': u"orm['rcl.Community']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'rating': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '0'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'community_experiences'", 'to': u"orm['users.User']"})
-        },
         u'users.user': {
             'Meta': {'object_name': 'User'},
             'biography': ('django.db.models.fields.TextField', [], {}),
@@ -127,4 +98,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['rcl']
+    complete_apps = ['privacy']
