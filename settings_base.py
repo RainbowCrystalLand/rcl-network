@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     # Internal apps
     'users',
     'rcl',
+    'privacy',
 )
 
 # A sample logging configuration. The only tangible logging

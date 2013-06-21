@@ -1,4 +1,6 @@
 from django.db import models
+# models
+from privacy.models import RCLPrivacySetting
 # translation & other utils
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
@@ -15,8 +17,8 @@ class RCL(models.Model):
     observer = models.ForeignKey(
         get_user_model(), verbose_name=_('observer'), null=True,
         related_name='observers')
-    # privacy_settings = model.ForeignKey(
-    #    RCLPrivacySettings, _('privacy settings'))
+    privacy_settings = models.OneToOneField(
+        RCLPrivacySetting, verbose_name=_('privacy settings'), blank=True)
 
     ## META ##
     class Meta:
@@ -40,7 +42,7 @@ class Community(RCL):
     needs_people = models.BooleanField(_('needs people'), default=False)
     url_name = models.SlugField(
         _('url name'), max_length=127, unique=True, db_index=True)
-    datetime_joined = models.DateTimeField(auto_now_add=True)
+    datetime_joined = models.DateTimeField(_('datetime joined'), auto_now_add=True)
 
     ## METHODS ##
     def __unicode__(self):
