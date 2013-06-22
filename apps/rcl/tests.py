@@ -1,9 +1,13 @@
 from django.test import TestCase
 # models
 from rcl.models import Community, CommunityExperience
+from privacy.models import RCLPrivacySetting
 from users.models import User
 # exceptions
 from django.db import IntegrityError
+# others
+from django.test.client import Client
+from django.core.urlresolvers import reverse
 
 
 class ClassTest(TestCase):
@@ -11,7 +15,8 @@ class ClassTest(TestCase):
         u = User(email='test@test.com')
         u.save()
         self.user = u
-        c = Community(url_name='test-url-setup')
+        ps = RCLPrivacySetting.objects.create()
+        c = Community(url_name='test-url-setup', privacy_settings=ps)
         c.save()
         self.community = c
 
@@ -20,10 +25,12 @@ class ClassTest(TestCase):
         Just creates a Community with some information and
         saves the instance.
         """
+        ps = RCLPrivacySetting.objects.create()
         c = Community(
             name='Test',
             kind=Community.LAND,
-            url_name='test-url'
+            url_name='test-url',
+            privacy_settings=ps
         )
         c.save()
 
@@ -31,9 +38,11 @@ class ClassTest(TestCase):
         """
         Tries to save a Community without name, checks it's not possible
         """
-        c = Community(url_name='test-url')
+        ps = RCLPrivacySetting.objects.create()
+        c = Community(url_name='test-url', privacy_settings=ps)
         c.save()
-        c = Community(url_name='test-url')
+        ps = RCLPrivacySetting.objects.create()
+        c = Community(url_name='test-url', privacy_settings=ps)
         try:
             c.save()
         except IntegrityError:
@@ -42,3 +51,32 @@ class ClassTest(TestCase):
     def test_community_experience(self):
         ce = CommunityExperience(user=self.user, community=self.community)
         ce.save()
+
+
+class MainViewsTest(TestCase):
+    """
+    This class tests all the views that are part of the main RCL site (ie not
+    the views of the mini sites).
+    """
+    def setup(self):
+        self.client = Client()
+
+    def test_home_page(self):
+        response = self.client.get(reverse('home'))
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
+    def test_history_page(self):
+        response = self.client.get(reverse('main-history'))
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
+    def test_dci_page(self):
+        response = self.client.get(reverse('main-dci'))
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
+    def test_join_page(self):
+        response = self.client.get(reverse('main-join'))
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)

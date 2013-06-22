@@ -1,0 +1,18 @@
+{% extends "rcl/main/base_main.html" %}
+{% load i18n %}
+
+{% block title%}Rainbow Crystal Land - Welcome home{% endblock %}
+
+{% block content %}
+
+    {% blocktrans %}
+        Welcome home! Here will go the content of the main page.
+    {% endblocktrans %}
+
+{% endblock %}
+
+{% block extrascript %}
+<script type="text/javascript">
+    $('#menu-home').addClass('active');
+</script>
+{% endblock %}
