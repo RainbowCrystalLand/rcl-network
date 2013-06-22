@@ -18,7 +18,8 @@ class RCL(models.Model):
         get_user_model(), verbose_name=_('observer'), null=True,
         related_name='observers')
     privacy_settings = models.OneToOneField(
-        RCLPrivacySetting, verbose_name=_('privacy settings'), blank=True)
+        RCLPrivacySetting, verbose_name=_('privacy settings'),
+        null=True, blank=True)
 
     ## META ##
     class Meta:

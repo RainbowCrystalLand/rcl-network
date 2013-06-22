@@ -1,0 +1,18 @@
+{% extends "rcl/main/base_main.html" %}
+{% load i18n %}
+
+{% block title%}Rainbow Crystal Land - How to Join{% endblock %}
+
+{% block content %}
+
+    {% blocktrans %}
+        Explanation on how to join.
+    {% endblocktrans %}
+
+{% endblock %}
+
+{% block extrascript %}
+<script type="text/javascript">
+    $('#menu-join').addClass('active');
+</script>
+{% endblock %}

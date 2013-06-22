@@ -1,0 +1,18 @@
+{% extends "rcl/main/base_main.html" %}
+{% load i18n %}
+
+{% block title%}Rainbow Crystal Land - History{% endblock %}
+
+{% block content %}
+
+    {% blocktrans %}
+        The history of RCLs.
+    {% endblocktrans %}
+
+{% endblock %}
+
+{% block extrascript %}
+<script type="text/javascript">
+    $('#menu-history').addClass('active');
+</script>
+{% endblock %}
