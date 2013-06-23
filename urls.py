@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', HomePageView.as_view(), name='home'),
     url(r'^rcl/', include('rcl.urls')),
+    url(r'^u/', include('users.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

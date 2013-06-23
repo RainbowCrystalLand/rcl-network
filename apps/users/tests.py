@@ -1,9 +1,15 @@
 from django.test import TestCase
+from django.test.client import Client
 # models
 from users.models import User, UserManager
+# forms
+from users.forms import UserUpdateForm
 # exceptions
 from django.db import IntegrityError
 from django.contrib.auth.models import SiteProfileNotAvailable
+# translation & other utils
+from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext_lazy as _
 
 
 class UserClassTest(TestCase):
@@ -78,3 +84,46 @@ class UserManagerTest(TestCase):
         user = User.objects.create_superuser(
             email="test@test.com", password="test")
         self.assertNotEqual(user.pk, None)
+
+
+class UserViewsTest(TestCase):
+    """
+    This class tests all views related to the User model
+    """
+    def setUp(self):
+        user = User.objects.create_user(email='test@test.com', password='test')
+        self.user = user
+        self.client = Client()
+        self.update_url = reverse('users-information-edit')
+
+    def test_user_update_get_logged(self):
+        self.client.login(email='test@test.com', password='test')
+        # Make the request
+        response = self.client.get(self.update_url)
+        # Check response is OK
+        self.assertEqual(response.status_code, 200)
+        # Check that form and instance are the correct ones
+        self.assertEqual(response.context['object'], self.user)
+        self.assertEqual(type(response.context['form']), UserUpdateForm)
+        # Check template used
+        self.assertTemplateUsed(response, 'users/user_update_form.html')
+        self.client.logout()
+
+    def test_user_update_post_logged(self):
+        self.client.login(email='test@test.com', password='test')
+        # Prepare data and post the request
+        data = {
+            'first_name': 'john',
+            'last_name': 'main',
+            'biography': 'short test bio'
+        }
+        response = self.client.post(self.update_url, data)
+        # Check that redirects to corresponding url
+        self.assertRedirects(response, self.update_url)
+        # Reload the user to check changes
+        self.user = User.objects.get(pk=self.user.pk)
+        # Check that form had effect
+        self.assertEqual(self.user.first_name, 'john')
+        self.assertEqual(self.user.last_name, 'main')
+        self.assertEqual(self.user.biography, 'short test bio')
+        self.client.logout()
