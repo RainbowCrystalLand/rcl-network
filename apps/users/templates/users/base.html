@@ -1,0 +1,18 @@
+{% extends "rcl/base_main.html" %}
+{% load i18n %}
+
+{% block extra_menu %}
+    {% if user.is_authenticated %}
+    <div class="btn-group pull-right">
+        <a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+        {{ user }}
+        <span class="caret"></span>
+        </a>
+
+        <ul class="dropdown-menu">
+            <li><a tabindex="-1" href="{% url 'users-dashboard' %}">{% trans 'Dashboard' %}</a></li>
+            <li><a tabindex="-1" href="{% url 'logout' %}">{% trans 'Logout' %}</a></li>
+        </ul>
+    </div>
+    {% endif %}
+{% endblock %}

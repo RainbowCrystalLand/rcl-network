@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.views.generic.edit import UpdateView
+from django.views.generic.base import TemplateView
 # forms
 from users.forms import UserUpdateForm
 # models
@@ -7,6 +8,10 @@ from users.models import User
 # translation & other utils
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
+
+
+class DashboardView(TemplateView):
+    template_name = 'users/dashboard.html'
 
 
 class UserUpdateView(UpdateView):
@@ -20,7 +25,7 @@ class UserUpdateView(UpdateView):
         return self.request.user
 
     def get_success_url(self):
-        return reverse('users-information-edit')
+        return reverse('users-profile-edit')
 
     def form_valid(self, form):
         '''

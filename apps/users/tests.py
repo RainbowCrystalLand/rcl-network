@@ -9,7 +9,6 @@ from django.db import IntegrityError
 from django.contrib.auth.models import SiteProfileNotAvailable
 # translation & other utils
 from django.core.urlresolvers import reverse
-from django.utils.translation import ugettext_lazy as _
 
 
 class UserClassTest(TestCase):
@@ -94,7 +93,15 @@ class UserViewsTest(TestCase):
         user = User.objects.create_user(email='test@test.com', password='test')
         self.user = user
         self.client = Client()
-        self.update_url = reverse('users-information-edit')
+        self.update_url = reverse('users-profile-edit')
+        self.dashboard_url = reverse('users-dashboard')
+        self.login_url = reverse('login')
+
+    def test_user_update_get_not_logged(self):
+        # Make the request
+        response = self.client.get(self.update_url)
+        # Check that redirects to corresponding url
+        self.assertRedirects(response, self.login_url+'?next='+self.update_url)
 
     def test_user_update_get_logged(self):
         self.client.login(email='test@test.com', password='test')
@@ -126,4 +133,21 @@ class UserViewsTest(TestCase):
         self.assertEqual(self.user.first_name, 'john')
         self.assertEqual(self.user.last_name, 'main')
         self.assertEqual(self.user.biography, 'short test bio')
+        self.client.logout()
+
+    def test_user_dashboard_not_logged(self):
+        # Make the request
+        response = self.client.get(self.dashboard_url)
+        # Check that redirects to corresponding url
+        self.assertRedirects(response,
+                             self.login_url+'?next='+self.dashboard_url)
+
+    def test_user_dashboard_logged(self):
+        self.client.login(email='test@test.com', password='test')
+        # Make the request
+        response = self.client.get(self.dashboard_url)
+        # Check response is OK
+        self.assertEqual(response.status_code, 200)
+        # Check template used
+        self.assertTemplateUsed(response, 'users/dashboard.html')
         self.client.logout()

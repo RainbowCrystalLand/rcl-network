@@ -13,10 +13,10 @@ class RCL(models.Model):
     description = models.TextField(_('description'))
     internet_focalizer = models.ForeignKey(
         get_user_model(), verbose_name=_('internet focalizer'), null=True,
-        related_name='internet_focalizers')
+        related_name='focalized_rcl')
     observer = models.ForeignKey(
         get_user_model(), verbose_name=_('observer'), null=True,
-        related_name='observers')
+        related_name='observer_rcl')
     privacy_settings = models.OneToOneField(
         RCLPrivacySetting, verbose_name=_('privacy settings'),
         null=True, blank=True)
