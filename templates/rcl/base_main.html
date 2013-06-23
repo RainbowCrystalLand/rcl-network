@@ -34,6 +34,7 @@
                             <li id="menu-dci"><a href="{% url 'main-dci' %}">Declaration of Common Intention</a></li>
                             <li id="menu-join"><a href="{% url 'main-join' %}">How to Join</a></li>
                         </ul>
+                        {% block extra_menu %}{% endblock %}
                         </div>
                         </div>
                     </div>
