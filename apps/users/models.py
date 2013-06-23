@@ -63,7 +63,7 @@ class User(AbstractBaseUser, PermissionsMixin):
             'Designates whether this user should be treated as '
             'active. Unselect this instead of deleting accounts.'))
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
-    biography = models.TextField(_('biography'))
+    biography = models.TextField(_('biography'), blank=True)
 
     ## Managers ##
     objects = UserManager()
