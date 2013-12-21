@@ -1,4 +1,4 @@
-Django==1.5
+Django==1.6
 South
 django-bootstrap-toolkit
-psycopg2==2.5
+psycopg2
