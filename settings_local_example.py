@@ -23,3 +23,13 @@ MEDIA_ROOT = ''
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
 STATIC_ROOT = ''
+
+# Email settings
+#EMAIL_USE_TLS = True
+EMAIL_HOST = ''
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 587
+
+# Django Debug Toolbar
+INTERNAL_IPS = ('127.0.0.1',)

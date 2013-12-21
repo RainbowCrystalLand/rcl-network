@@ -1,13 +1,17 @@
 {% extends "registration/registration_base.html" %}
+{% load url from future %}
 {% load i18n crispy_forms_tags %}
 
 {% block title %}{% trans "Registration form" %}{% endblock %}
+
+{% block masthead %}
+<h2>{% trans "Registration form" %}</h2>
+{% endblock %}
 
 {% block content %}
 <form method="post" action="." class="form-horizontal" role="form">
     {% csrf_token %}
     {{ form|crispy }}
-    <input type="hidden" name="next" value="{{ next }}"/>
-    <input type="submit" class="btn btn-primary" value="{% trans 'Login' %}"/>
+    <input type="submit" class="btn btn-primary" value="{% trans "Register" %}">
 </form>
 {% endblock %}

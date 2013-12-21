@@ -2,6 +2,7 @@
 
 import os.path
 import sys
+from django.core.urlresolvers import reverse
 PROJECT_ROOT = os.path.normpath(os.path.dirname(__file__))
 sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 
@@ -73,7 +74,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -83,7 +84,7 @@ SECRET_KEY = '6@bltq%-qf&q6m**x3)ho(g2xprz4&hhs0omjaztp&iz)^gad8'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    #     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -94,6 +95,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -124,7 +126,10 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     # External apps
     'south',
-    'bootstrap_toolkit',
+    'crispy_forms',
+    'registration',
+    'registration_email',
+    'debug_toolbar',
     # Internal apps
     'users',
     'rcl',
@@ -162,3 +167,16 @@ LOGGING = {
 
 # Our custom User model (replaces Django auth User)
 AUTH_USER_MODEL = 'users.User'
+
+# User Bootstrap3 style
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+# Settings for django-registration-email more doc at
+# https://github.com/bitmazk/django-registration-email
+ACCOUNT_ACTIVATION_DAYS = 7
+AUTHENTICATION_BACKENDS = (
+    'registration_email.auth.EmailBackend',
+)
+LOGIN_REDIRECT_URL = '/'
+REGISTRATION_EMAIL_ACTIVATE_SUCCESS_URL = lambda request, user: reverse('main-welcome')
+REGISTRATION_EMAIL_REGISTER_SUCCESS_URL = lambda request, user: reverse('main-registration-successful')
