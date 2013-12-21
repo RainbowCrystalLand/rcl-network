@@ -1,8 +1,9 @@
 import warnings
+import re
 from django.db import models
+from django.core import validators
 # models
-from django.contrib.auth.models import (AbstractBaseUser, PermissionsMixin,
-                                        BaseUserManager)
+from django.contrib.auth.models import (UserManager, AbstractBaseUser, PermissionsMixin)
 # exceptions
 from django.contrib.auth.models import SiteProfileNotAvailable
 from django.core.exceptions import ImproperlyConfigured
@@ -13,38 +14,6 @@ from django.core.mail import send_mail
 from django.utils import timezone
 
 
-class UserManager(BaseUserManager):
-    """
-    Custom Manager for the custom User class. Just removes the need to use an
-    username, we use the email as identifier.
-    """
-
-    def create_user(self, email=None, password=None, **extra_fields):
-        """
-        Creates and saves a User with the given email and password.
-        """
-        now = timezone.now()
-        if not email:
-            raise ValueError(_('The given email must be set'))
-        email = UserManager.normalize_email(email)
-        user = self.model(email=email,
-                          is_staff=False, is_active=True, is_superuser=False,
-                          last_login=now, date_joined=now, **extra_fields)
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, email, password, **extra_fields):
-        """
-        Creates a superuser instance of User with the given email and password
-        """
-        u = self.create_user(email, password, **extra_fields)
-        u.is_staff = True
-        u.is_active = True
-        u.is_superuser = True
-        u.save(using=self._db)
-        return u
-
 
 class User(AbstractBaseUser, PermissionsMixin):
     """
@@ -52,6 +21,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     network.
     """
     ## FIELDS ##
+    username = models.CharField(_('username'), max_length=30, unique=True,
+        help_text=_('Required. 30 characters or fewer. Letters, numbers and '
+                    '@/./+/-/_ characters'),
+        validators=[
+            validators.RegexValidator(re.compile('^[\w.@+-]+$'), _('Enter a valid username.'), 'invalid')
+        ], default='')
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
@@ -73,6 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     # https://docs.djangoproject.com/en/dev/topics/auth/customizing
     # /#django.contrib.auth.models.CustomUser.USERNAME_FIELD
     USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
 
     ## CLASSES AND METHODS ##
     class Meta:

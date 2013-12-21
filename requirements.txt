@@ -1,4 +1,7 @@
 Django==1.6
 South
-django-bootstrap-toolkit
+django-crispy-forms
 psycopg2
+django-registration
+-e git://github.com/sromero84/django-registration-email#egg=registration_email
+django-debug-toolbar
