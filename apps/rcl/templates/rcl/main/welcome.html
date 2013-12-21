@@ -1,0 +1,13 @@
+{% extends "rcl/main/base.html" %}
+{% load i18n %}
+
+{% block title%}{% trans "Rainbow Crystal Land" %} - {% trans "Welcome" %}{% endblock %}
+
+{% block content %}
+
+    {% blocktrans %}
+        Welcome! Your account has been activated, continue to the  
+    {% endblocktrans %}
+    <a href="{% url 'auth_login' %}">{% trans 'Login Page' %}</a>.
+
+{% endblock %}

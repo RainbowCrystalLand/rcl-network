@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 
 
@@ -16,3 +15,11 @@ class DCIView(TemplateView):
 
 class JoinView(TemplateView):
     template_name = 'rcl/main/join.html'
+
+
+class WelcomeView(TemplateView):
+    template_name = 'rcl/main/welcome.html'
+
+
+class RegistrationSuccessfulView(TemplateView):
+    template_name = 'rcl/main/registration_successful.html'
