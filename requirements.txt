@@ -5,3 +5,9 @@ psycopg2
 django-registration
 -e git://github.com/sromero84/django-registration-email#egg=registration_email
 django-debug-toolbar
+-e git://github.com/sromero84/pybbm#egg=pybb
+# By recommendation for pybbm,
+# https://pybbm.readthedocs.org/en/latest/install.html#fresh-project
+django-pure-pagination
+Pillow-PIL
+sorl-thumbnail

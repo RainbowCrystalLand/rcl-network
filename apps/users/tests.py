@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.test import TestCase
 from django.test.client import Client
 # models
@@ -93,8 +95,8 @@ class UserViewsTest(TestCase):
         user = User.objects.create_user(email='test@test.com', password='test')
         self.user = user
         self.client = Client()
-        self.update_url = reverse('users-profile-edit')
-        self.dashboard_url = reverse('users-dashboard')
+        self.update_url = reverse('users:profile-edit')
+        self.dashboard_url = reverse('users:dashboard')
         self.login_url = reverse('login')
 
     def test_user_update_get_not_logged(self):

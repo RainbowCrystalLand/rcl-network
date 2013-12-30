@@ -1,0 +1,29 @@
+{% extends 'pybb/base.html' %}
+
+{% load url from future %}
+
+{% load i18n pybb_tags crispy_forms_tags %}
+
+{% block title %}{% trans "Profile editing" %}{% endblock title %}
+
+{% block content %}
+    <h1>{% trans "Profile editing" %}</h1>
+    {% include 'pybb/avatar.html' with user=user %}
+    <form method="post" enctype="multipart/form-data" class="profile-edit">
+        {% csrf_token %}
+        
+        {% crispy form %}
+    </form>
+    <h1>{% trans "Subscriptions on topics" %}</h1>
+    <ul>
+        {% for sub in user.subscriptions.all %}
+            <li>
+                {% pybb_link sub %}
+                &mdash;
+                <strong>
+                    <a href="{% url 'pybb:delete_subscription' sub.id %}">{% trans "delete" %}</a>
+                </strong>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

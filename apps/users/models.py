@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import warnings
 import re
 from django.db import models
@@ -12,7 +14,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.http import urlquote
 from django.core.mail import send_mail
 from django.utils import timezone
-
 
 
 class User(AbstractBaseUser, PermissionsMixin):

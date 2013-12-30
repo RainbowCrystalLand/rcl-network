@@ -1,6 +1,4 @@
 from django.db import models
-# models
-from privacy.models import RCLPrivacySetting
 # translation & other utils
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
@@ -18,7 +16,7 @@ class RCL(models.Model):
         get_user_model(), verbose_name=_('observer'), null=True,
         related_name='observer_rcl')
     privacy_settings = models.OneToOneField(
-        RCLPrivacySetting, verbose_name=_('privacy settings'),
+        'privacy.RCLPrivacySetting', verbose_name=_('privacy settings'),
         null=True, blank=True)
 
     ## META ##

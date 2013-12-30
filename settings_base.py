@@ -44,7 +44,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = PROJECT_ROOT + '/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -96,11 +96,15 @@ MIDDLEWARE_CLASSES = (
     # Uncomment the next line for simple clickjacking protection:
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'pybb.middleware.PybbMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.static',
+    'django.core.context_processors.i18n',
+    'pybb.context_processors.processor',
 )
 
 ROOT_URLCONF = 'urls'
@@ -130,10 +134,13 @@ INSTALLED_APPS = (
     'registration',
     'registration_email',
     'debug_toolbar',
+    'pybb',
+    'sorl',
     # Internal apps
     'users',
     'rcl',
     'privacy',
+    'pybb_custom',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -178,5 +185,14 @@ AUTHENTICATION_BACKENDS = (
     'registration_email.auth.EmailBackend',
 )
 LOGIN_REDIRECT_URL = '/'
-REGISTRATION_EMAIL_ACTIVATE_SUCCESS_URL = lambda request, user: reverse('main-welcome')
-REGISTRATION_EMAIL_REGISTER_SUCCESS_URL = lambda request, user: reverse('main-registration-successful')
+REGISTRATION_EMAIL_ACTIVATE_SUCCESS_URL = lambda request, user: reverse('rcl:main-welcome')
+REGISTRATION_EMAIL_REGISTER_SUCCESS_URL = lambda request, user: reverse('rcl:main-registration-successful')
+
+from django.utils.translation import ugettext_lazy as _
+
+# Pybb Settings
+PYBB_DEFAULT_TITLE = _('RCL Forum')
+PYBB_POST_FORM = 'pybb_custom.forms.CustomPostForm'
+PYBB_ADMIN_POST_FORM = 'pybb_custom.forms.CustomAdminPostForm'
+PYBB_ENABLE_POLL_QUESTION = False
+PYBB_MARKUP = 'markdown'

@@ -7,7 +7,7 @@
 <h1>Dashboard</h1>
 
 <br/>
-<a href="{% url 'users-profile-edit' %}">Edit profile</a>
+<a href="{% url 'users:profile-edit' %}">Edit profile</a>
 {% if user.focalized_rcl.all %}
 <h3>Edit a RCL</h3>
 

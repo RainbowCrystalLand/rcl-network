@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import patterns, include, url
@@ -11,8 +13,10 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', HomePageView.as_view(), name='home'),
-    url(r'^rcl/', include('rcl.urls')),
-    url(r'^u/', include('users.urls')),
+    url(r'^rcl/', include('rcl.urls', namespace='rcl')),
+    url(r'^u/', include('users.urls', namespace='users')),
+    
+    url(r'^forum/', include('pybb.urls', namespace='pybb')),
 
     #url(r'^accounts/', include('django.contrib.auth.urls')),
     # django-registration-email urls instead
