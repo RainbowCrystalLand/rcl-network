@@ -192,6 +192,7 @@ REGISTRATION_EMAIL_REGISTER_SUCCESS_URL = lambda request, user: reverse('rcl:mai
 from django.utils.translation import ugettext_lazy as _
 
 # Pybb Settings
+PYBB_TOPIC_PAGE_SIZE = 20
 PYBB_FORUM_PAGE_SIZE = 20
 PYBB_DEFAULT_TITLE = _('RCL Forum')
 #PYBB_MARKUP = 'markdown'
