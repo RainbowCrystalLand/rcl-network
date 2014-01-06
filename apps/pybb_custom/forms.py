@@ -25,7 +25,6 @@ class CustomAdminPostForm(AdminPostForm):
 		super(CustomAdminPostForm, self).__init__(*args, **kwargs)
 		self.helper = Bootstrap3HorizontalHelper(self)
 		self.helper.template = '%s/uni_form.html' % CRISPY_TEMPLATE_PACK
-		self.helper.add_input(Submit('submit', _('Submit')))
 
 	class Meta(object):
 		model = Post
@@ -37,7 +36,6 @@ class CustomPostForm(PostForm):
 		super(CustomPostForm, self).__init__(*args, **kwargs)
 		self.helper = Bootstrap3HorizontalHelper(self)
 		self.helper.template = '%s/uni_form.html' % CRISPY_TEMPLATE_PACK
-		self.helper.add_input(Submit('submit', _('Submit')))
 
 	class Meta(object):
 		model = Post

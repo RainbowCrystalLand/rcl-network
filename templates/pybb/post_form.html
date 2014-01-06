@@ -12,7 +12,7 @@
     {% endif %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     
-    {% crispy form %}
+    {{ form|crispy }}
     <div id='emoticons' class="form-group">
       <label for="id_emoticons" class="control-label col-lg-2"></label>
       <div class="controls col-lg-8">
@@ -21,6 +21,7 @@
       {% endfor %}
       </div>
     </div>
+    
 
     {% if request.user|pybb_may_create_poll and form.poll_type %}
       {% include "pybb/poll_edit_form.html" %}

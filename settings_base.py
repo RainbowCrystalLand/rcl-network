@@ -44,7 +44,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = PROJECT_ROOT + '/media/'
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, "media")
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -55,7 +55,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(PROJECT_ROOT, "project_static")
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -134,8 +134,9 @@ INSTALLED_APPS = (
     'registration',
     'registration_email',
     'debug_toolbar',
+    'sorl.thumbnail',
     'pybb',
-    'sorl',
+    'pure_pagination',
     # Internal apps
     'users',
     'rcl',
@@ -191,8 +192,9 @@ REGISTRATION_EMAIL_REGISTER_SUCCESS_URL = lambda request, user: reverse('rcl:mai
 from django.utils.translation import ugettext_lazy as _
 
 # Pybb Settings
+PYBB_FORUM_PAGE_SIZE = 20
 PYBB_DEFAULT_TITLE = _('RCL Forum')
-PYBB_POST_FORM = 'pybb_custom.forms.CustomPostForm'
-PYBB_ADMIN_POST_FORM = 'pybb_custom.forms.CustomAdminPostForm'
-PYBB_ENABLE_POLL_QUESTION = False
-PYBB_MARKUP = 'markdown'
+#PYBB_MARKUP = 'markdown'
+PYBB_PERMISSION_HANDLER = 'pybb_custom.permissions.PermissionHandler'
+PYBB_ATTACHMENT_UPLOAD_TO = 'media/pybb/attachments'
+PYBB_ATTACHMENT_ENABLE = True

@@ -10,8 +10,20 @@ body {
     text-align: center;
 }
 
-.main #content {
+.main .content {
     min-height: 400px;
 }
 
+/* Pybb utils */
+.post-signature {
+	margin-top: 10px;
+	border-top: 1px solid #C9C9C9;
+}
+
+
 /* Bootstrap overrides */
+blockquote {
+  padding: 10px 20px;
+  margin: 0 0 10px;
+  border-left: 5px solid #C9C9C9;
+}

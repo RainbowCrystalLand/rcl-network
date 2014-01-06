@@ -7,6 +7,10 @@ from django.db import models
 
 class Migration(SchemaMigration):
 
+    needed_by = (
+        ("pybb", "0001_initial"),
+    )
+
     def forwards(self, orm):
         # Adding field 'User.username'
         db.add_column(u'users_user', 'username',

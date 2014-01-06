@@ -12,7 +12,8 @@
     <form method="post" enctype="multipart/form-data" class="profile-edit">
         {% csrf_token %}
         
-        {% crispy form %}
+        {{ form|crispy }}
+        <p>{% include "pybb/_button_save.html" %}</p>
     </form>
     <h1>{% trans "Subscriptions on topics" %}</h1>
     <ul>
