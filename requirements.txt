@@ -1,7 +1,20 @@
 Django==1.6
-South
-django-crispy-forms
-psycopg2
-django-registration
--e git://github.com/sromero84/django-registration-email#egg=registration_email
-django-debug-toolbar
+Markdown==2.3.1
+# Install platform libraries if needed, see
+# https://pypi.python.org/pypi/Pillow/2.1.0
+Pillow==2.3.0
+Pillow-PIL==0.1dev
+South==0.8.4
+django-annoying==0.7.9
+django-crispy-forms==1.4.0
+django-debug-toolbar==1.0
+django-registration==1.0
+-e git://github.com/sromero84/django-registration-email@c8eade44f84647e52afd9949395f846aa380c43c#egg=django_registration_email-dev
+pep8==1.4.6
+postmarkup==1.2.0
+psycopg2==2.5.1
+pybbm==0.15.1
+# By recommendation for pybbm,
+# https://pybbm.readthedocs.org/en/latest/install.html#fresh-project
+django-pure-pagination==0.2.1
+sorl-thumbnail==11.12

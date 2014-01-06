@@ -7,20 +7,20 @@ from django.db import models
 
 class Migration(SchemaMigration):
 
-    needed_by = (
-        ("pybb", "0001_initial"),
-    )
-
     def forwards(self, orm):
-        # Adding field 'User.username'
-        db.add_column(u'users_user', 'username',
-                      self.gf('django.db.models.fields.CharField')(default='', unique=True, max_length=30),
-                      keep_default=False)
+        # Removing unique constraint on 'User', fields ['username']
+        db.delete_unique(u'users_user', ['username'])
 
+
+        # Changing field 'User.username'
+        db.alter_column(u'users_user', 'username', self.gf('django.db.models.fields.CharField')(max_length=64))
 
     def backwards(self, orm):
-        # Deleting field 'User.username'
-        db.delete_column(u'users_user', 'username')
+
+        # Changing field 'User.username'
+        db.alter_column(u'users_user', 'username', self.gf('django.db.models.fields.CharField')(max_length=30, unique=True))
+        # Adding unique constraint on 'User', fields ['username']
+        db.create_unique(u'users_user', ['username'])
 
 
     models = {
@@ -59,7 +59,7 @@ class Migration(SchemaMigration):
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Permission']"}),
-            'username': ('django.db.models.fields.CharField', [], {'default': "''", 'unique': 'True', 'max_length': '30'})
+            'username': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '64', 'blank': 'True'})
         }
     }
 

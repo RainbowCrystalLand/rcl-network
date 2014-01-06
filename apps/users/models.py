@@ -1,7 +1,7 @@
+# -*- coding: utf-8 -*-
+
 import warnings
-import re
 from django.db import models
-from django.core import validators
 # models
 from django.contrib.auth.models import (UserManager, AbstractBaseUser, PermissionsMixin)
 # exceptions
@@ -14,19 +14,15 @@ from django.core.mail import send_mail
 from django.utils import timezone
 
 
-
 class User(AbstractBaseUser, PermissionsMixin):
     """
     Our custom User model. Represents a physical person that users the
     network.
     """
     ## FIELDS ##
-    username = models.CharField(_('username'), max_length=30, unique=True,
+    username = models.CharField(_('nickname'), max_length=64,
         help_text=_('Required. 30 characters or fewer. Letters, numbers and '
-                    '@/./+/-/_ characters'),
-        validators=[
-            validators.RegexValidator(re.compile('^[\w.@+-]+$'), _('Enter a valid username.'), 'invalid')
-        ], default='')
+                    '@/./+/-/_ characters'), default='', blank=True)
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True)

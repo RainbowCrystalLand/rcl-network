@@ -1,14 +1,12 @@
 {% extends "users/base.html" %}
-{% load bootstrap_toolkit i18n %}
+{% load crispy_forms_tags i18n %}
+
+{% block title %}{% trans "Rainbow Crystal Lands" %} - {% trans "Personal Information" %}{% endblock %}
 
 {% block content %}
-
-{% bootstrap_messages %}
-
-<form action="." method="POST">
-    {% csrf_token %}
-    {{ form|as_bootstrap }}
-    <input type="submit" class="btn btn-primary" value="{% trans 'Update' %}"/>
-</form>
-
+	<form action="." method="POST">
+	    {% csrf_token %}
+	    {{ form|crispy }}
+	    <input type="submit" class="btn btn-primary" value="{% trans 'Update' %}"/>
+	</form>
 {% endblock %}

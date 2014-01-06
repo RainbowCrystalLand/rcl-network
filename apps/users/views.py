@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.contrib import messages
 from django.views.generic.edit import UpdateView
 from django.views.generic.base import TemplateView
@@ -25,7 +27,7 @@ class UserUpdateView(UpdateView):
         return self.request.user
 
     def get_success_url(self):
-        return reverse('users-profile-edit')
+        return reverse('users:profile-edit')
 
     def form_valid(self, form):
         '''

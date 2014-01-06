@@ -1,0 +1,39 @@
+{% load url from future %}
+{% load i18n pybb_tags crispy_forms_tags %}
+<form role="form" class="post-form form-horizontal" action="
+    {% if forum %}
+        {% url 'pybb:add_topic' forum.pk %}
+    {% else %}
+        {% if topic %}
+            {% url 'pybb:add_post' topic.pk %}
+        {% else %}
+            {% url 'pybb:edit_post' pk=object.pk %}
+        {% endif %}
+    {% endif %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    {{ form|crispy }}
+    <div id='emoticons' class="form-group">
+      <label for="id_emoticons" class="control-label col-lg-2"></label>
+      <div class="controls col-lg-8">
+      {% for smile, url in form.available_smiles.items %}
+        <a href='#' title='{{ smile|safe }}'><img src='{{ STATIC_URL }}{{ form.smiles_prefix }}{{ url }}'></a>
+      {% endfor %}
+      </div>
+    </div>
+    
+
+    {% if request.user|pybb_may_create_poll and form.poll_type %}
+      {% include "pybb/poll_edit_form.html" %}
+    {% endif %}
+    {% include "pybb/attachments_formset.html" %}
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <p class="submit">{% include "pybb/_button_submit.html" %}</p>
+        </div>
+      </div>
+    
+</form>
+
+

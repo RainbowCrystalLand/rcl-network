@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.test import TestCase
 # models
 from privacy.models import PrivacyLevel, RCLPrivacySetting

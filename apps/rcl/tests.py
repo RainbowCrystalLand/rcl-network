@@ -67,16 +67,16 @@ class MainViewsTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_history_page(self):
-        response = self.client.get(reverse('main-history'))
+        response = self.client.get(reverse('rcl:main-history'))
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
 
     def test_dci_page(self):
-        response = self.client.get(reverse('main-dci'))
+        response = self.client.get(reverse('rcl:main-dci'))
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
 
     def test_join_page(self):
-        response = self.client.get(reverse('main-join'))
+        response = self.client.get(reverse('rcl:main-join'))
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
