@@ -21,8 +21,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     """
     ## FIELDS ##
     username = models.CharField(_('nickname'), max_length=64,
-        help_text=_('Required. 30 characters or fewer. Letters, numbers and '
-                    '@/./+/-/_ characters'), default='', blank=True)
+        help_text=_('Fill with the words that people use to call you'), default='', 
+        blank=True)
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True)

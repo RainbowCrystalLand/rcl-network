@@ -1,17 +1,71 @@
 {% extends "rcl/main/base.html" %}
 {% load i18n %}
 
-{% block title%}{% trans "Rainbow Crystal Land" %} - {% trans "How to Join" %}{% endblock %}
+{% block title%}{% trans "RCL" %} - {% trans "How to Join" %}{% endblock %}
 
 {% block content %}
 
-    {% blocktrans %}
-        Explanation on how to join.
-    {% endblocktrans %}
+	<p>
+		{% blocktrans %}
+   		So you want to live in community, grow your own food, find peace, learn new skills, meet lots of new people and become part of a worldwide family, maybe build your house in an RCL some day? You might have to make some sacrifices but you’ll certainly reap many benefits.
+   		{% endblocktrans %}
+   	<p>
+
+   	<p>
+   		{% blocktrans %}
+		Whether you’re passing through on your travels or want to find a place to live for the rest of your life, your energy is wanted and needed. On this website you’ll find a database of RCL Communities already in existence and Scouting Missions to find new ones around the world. Read about them to find a place that tickles your fancy, contact them through their Internet Focalizer or ask around in the forums… or just turn up!
+		{% endblocktrans %}
+	</p>
+
+	<p>
+		{% blocktrans %}
+		Every RCL has a “carrying capacity”, meaning a maximum number of people the land and community can sustainably support. If we exceed that limit, we will be forced to either rely on capitalist mechanisms to sustain ourselves or to engage in non-sustainable food production methods, such as the use of chemicals, which is detrimental to both the health of humans and animals and to the quality of soil and water. Sustainability is therefore a key aspect of our vision and we are responsible as a worldwide family to respect the carrying capacities of our RCLs.
+		{% endblocktrans %}
+	</p>
+
+	<p>
+		{% blocktrans %}
+		On the other hand, a carrying capacity is a flexible limit that can’t easily be expressed as a figure. It is up to each individual RCL Community to deal with this issue in the best possible way. We hope every new arrival will always be welcomed in for at least a limited amount of time. We hope RCLs respond to overpopulation as an opportunity rather than a problem - the response from a community to such a scenario will hopefully be to find more land rather than kicking anyone out!
+		{% endblocktrans %}
+	</p>
+
+	<p>
+		{% blocktrans %}
+		Some RCLs may choose not to have an internet presence at all – though we hope at the very least every RCL will list their country and the contact email of their Internet Focalizer on this website. This does not mean that you’re not welcome to join them! It just means that you’ll have to search harder, follow word-of-mouth and magic. Many RCLs will only give you an approximate location, but don’t let that stop you – you’ll find it if you are meant to be there!
+		{% endblocktrans %}
+	</p>
+
+	<p>{% trans "Some advice for living in an RCL, especially if it’s your first time:" %}</p>
+
+	<ul>
+		<li>{% trans "Announce your arrival. Get shown around. Meet everyone there." %}</li>
+
+		<li>{% trans "Go to talking circles, this is the primary forum of the community." %}</li>
+
+		<li>{% trans "Be self-sufficient! This may seem like a contradiction, but we can never take for granted that the community will be able to provide for us." %}</li>
+
+		<li>{% trans "Bring a waterproof tent and / or tarp and make a good camp in case there is no shelter. Look after yourself, stay dry, warm and healthy. Only when you are able to look after yourself will you be able to contribute to the community. Bring a plate, spoon, torch, knife, etc." %}</li>
+
+		<li>{% trans "Give energy to the community! Come with the attitude of wanting to give more than you take. Cooking, cleaning, gardening, constructing… the tasks are endless." %}</li>
+
+		</li>{% trans "Take initiative but make sure you synchronize your efforts with the community. Find out what the vision for the land is. All land-use projects require the consensus of the community, don’t pick up a machete and start hacking away!" %}</li>
+
+		<li>{% trans "If you don’t know how to do something, ask!" %}</li>
+
+		<li>{% trans "Give money to the “magic hat” (communal money pot) if you have any. If not, don’t worry, give energy in other ways!" %}</li>
+
+		<li>{% trans "Open your heart. Connect with the others. Be humble. Take responsibility for your own personal development. Don’t be afraid to contribute to others’ personal development, everyone sometimes needs help to be fully aware of the impact of our own actions. Aim to solve all inter-personal issues before they become energy blocks that will affect yourself and the whole community. Sometimes love is tough." %}</li>
+
+		<li>{% trans "Be yourself! Realize yourself! Dance, sing, play, laugh, cry, love, be present! Do what you need to do to be happy!" %}</li>
+
+		<li>{% trans "Stay for as long as you can! The longer you stay, the more you’ll learn and the more you’ll be able to contribute. Teaching you can drain energy from the community unless you stay to put what you’ve learnt into practice." %}</li>
+	</ul>
+
+	<p>{% trans "Welcome home!" %}</p>
 
 {% endblock %}
 
-{% block extrascript %}
+{% block extra_script %}
 <script type="text/javascript">
     $('#menu-join').addClass('active');
 </script>

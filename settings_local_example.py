@@ -15,6 +15,9 @@ DATABASES = {
     }
 }
 
+# To use the local server domain
+SITE_ID = 2
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
 MEDIA_ROOT = ''

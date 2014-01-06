@@ -1,13 +1,25 @@
 from django.conf.urls import patterns, url
-from rcl.views import (HistoryView, DCIView, JoinView, WelcomeView, 
-	RegistrationSuccessfulView)
+from django.views.generic.base import TemplateView
+ 
 
 urlpatterns = patterns('',
     # Fill with URLs for Rainbow Crystal Lands main page and minipages
-    url(r'^history/$', HistoryView.as_view(), name='main-history'),
-    url(r'^dci/$', DCIView.as_view(), name='main-dci'),
-    url(r'^how-to-join/$', JoinView.as_view(), name='main-join'),
-    url(r'^welcome/$', WelcomeView.as_view(), name='main-welcome'),
-    url(r'^activate/$', RegistrationSuccessfulView.as_view(), 
+    url(r'^history/$', TemplateView.as_view(template_name='rcl/main/history.html'), 
+    	name='main-history'),
+    url(r'^dci/$', TemplateView.as_view(template_name='rcl/main/dci.html'), 
+    	name='main-dci'),
+    url(r'^join/$', TemplateView.as_view(template_name='rcl/main/join.html'), 
+    	name='main-join'),
+    url(r'^donate/$', TemplateView.as_view(template_name='rcl/main/donate.html'), 
+    	name='main-donate'),
+    url(r'^history/$', TemplateView.as_view(template_name='rcl/main/history.html'), 
+    	name='main-history'),
+    url(r'^about/$', TemplateView.as_view(template_name='rcl/main/about.html'), 
+    	name='main-about'),
+    url(r'^activate/$', TemplateView.as_view(
+    	template_name='rcl/main/registration_successful.html'), 
     	name='main-registration-successful'),
+    # Welcome after activation
+    url(r'^welcome/$', TemplateView.as_view(template_name='rcl/main/welcome.html'), 
+        name='main-welcome'),
 )

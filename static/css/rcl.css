@@ -1,5 +1,6 @@
 body {
 	background-color: #F7F6EB;
+	padding-bottom: 70px;
 }
 
 .form-control {
@@ -11,17 +12,35 @@ body {
 }
 
 .main .content {
-    min-height: 400px;
+    min-height: 540px;
 }
 
-/* Pybb utils */
+.footer {
+	text-align: center;
+}
+
+
+/********************************/
+/* Pybb extensions or overrides */
+/********************************/
 .post-signature {
 	margin-top: 10px;
 	border-top: 1px solid #C9C9C9;
 }
 
 
+/***********************/
 /* Bootstrap overrides */
+/***********************/
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333333;
+  background-color: #ffffff;
+  height:100%;
+}
+
 blockquote {
   padding: 10px 20px;
   margin: 0 0 10px;

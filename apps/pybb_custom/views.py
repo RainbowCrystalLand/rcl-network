@@ -49,7 +49,7 @@ class CustomAddPostView(AddPostView):
                     raise Http404
                 else:
                     post = get_object_or_404(Post, pk=quote_id)
-                    self.quote = defaults.PYBB_QUOTE_ENGINES[defaults.PYBB_MARKUP](post.body, getattr(post.user.username, 'username'))
+                    self.quote = defaults.PYBB_QUOTE_ENGINES[defaults.PYBB_MARKUP](post.body, getattr(post.user, 'username'))
 
                 if self.quote and request.is_ajax():
                     return HttpResponse(self.quote)

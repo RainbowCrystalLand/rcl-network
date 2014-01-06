@@ -1,18 +1,39 @@
 {% extends "rcl/main/base.html" %}
 {% load i18n %}
 
-{% block title%}{% trans "Rainbow Crystal Land" %} - {% trans "Declaration of Common Intention" %}{% endblock %}
+{% block title%}{% trans "RCL" %} - {% trans "Declaration of Common Intention" %}{% endblock %}
 
 {% block content %}
 
-    {% blocktrans %}
-        The whole Declaration of Common Intention.
-    {% endblocktrans %}
+	<!-- Nav tabs -->
+	<ul id="dci-tab" class="nav nav-tabs">
+	  <li><a href="#dci-part1" data-toggle="tab">Part I: Vision</a></li>
+	  <li><a href="#dci-part2" data-toggle="tab">Part II: Organization</a></li>
+	  <li><a href="#dci-appendix-a" data-toggle="tab">Appendix A: Accepting A New RCL</a></li>
+	  <li><a href="#dci-appendix-b" data-toggle="tab">Appendix B: RCL Organizations</a></li>
+	</ul>
+
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div class="tab-pane active" id="dci-part1">
+	  		{% include "rcl/main/dci-part-1.html" %}
+	  	</div>
+	  	<div class="tab-pane" id="dci-part2">
+	  		{% include "rcl/main/dci-part-2.html" %}
+	  	</div>
+	  	<div class="tab-pane" id="dci-appendix-a">
+	  		{% include "rcl/main/dci-appendix-a.html" %}
+	  	</div>
+	  	<div class="tab-pane" id="dci-appendix-b">
+	  		{% include "rcl/main/dci-appendix-b.html" %}
+	  	</div>
+	</div>
 
 {% endblock %}
 
-{% block extrascript %}
+{% block extra_script %}
 <script type="text/javascript">
     $('#menu-dci').addClass('active');
+    $('#dci-tab a:first').tab('show');
 </script>
 {% endblock %}
