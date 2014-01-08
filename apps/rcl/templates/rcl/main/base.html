@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load staticfiles i18n %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,12 +16,26 @@
         <link href="{% static 'css/bootstrap-theme.3.0.3.min.css' %}" rel="stylesheet">
         <!-- Site stlesheet, keep last to override possible values-->
         <link href="{% static 'css/rcl.css' %}" rel="stylesheet">
+        {# Include the fix to avoid top message for testing site appear over content #}
+        {% if debug %}
+          <link href="{% static 'css/debug_topbar.css' %}" rel="stylesheet">
+          <!-- disable Googlebot -->
+          <meta name="robots" content="nofollow"><meta name="googlebot" content="noindex">
+        {% endif %}
         {% block extra_head %}{% endblock %}
         {% block extracss %}{% endblock %}
     </head>
 
     <body>
         <div id="wrap"> 
+
+        {# Show only this if DEBUG = True in settings #}
+        {% if debug %}
+        <div class = "navbar-fixed-top">
+            <div class="text-center alert alert-warning">{% trans "Warning: your are visiting the testing site, all <strong>data stored here can be erased at anytime.</strong>" %}</div>
+        </div>
+        {% endif %}
+
         <div class="row-fluid main container">
             <div class="span10 offset1">
 

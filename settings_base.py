@@ -6,18 +6,24 @@ from django.core.urlresolvers import reverse
 PROJECT_ROOT = os.path.normpath(os.path.dirname(__file__))
 sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Rainbow Crystal Land devs', 'errors@rainbowcrystalland.org'),
 )
 
 MANAGERS = ADMINS
 
+INTERNAL_IPS = ('127.0.0.1', '75.126.44.88')
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '.rainbowcrystalland.org', # Allow domain and subdomains'
+    'localhost',
+    '127.0.0.1',
+]
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -101,6 +107,7 @@ MIDDLEWARE_CLASSES = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.static',
     'django.core.context_processors.i18n',
