@@ -9,7 +9,8 @@ django-annoying==0.7.9
 django-crispy-forms==1.4.0
 django-debug-toolbar==1.0
 django-registration==1.0
--e git://github.com/sromero84/django-registration-email@c8eade44f84647e52afd9949395f846aa380c43c#egg=django_registration_email-dev
+# we use this custom app because allows custom User model
+git+git://github.com/sromero84/django-registration-email.git#egg=django_registration_email
 pep8==1.4.6
 postmarkup==1.2.0
 psycopg2==2.5.1

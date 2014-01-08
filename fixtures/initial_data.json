@@ -14,5 +14,13 @@
     "domain": "localhost:8000", 
     "name": "Rainbow Crystal Land"
   }
+},
+{
+  "pk": 3, 
+  "model": "sites.site", 
+  "fields": {
+    "domain": "test.rainbowcrystalland.org", 
+    "name": "Rainbow Crystal Land [Testing]"
+  }
 }
 ]
