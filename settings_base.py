@@ -183,6 +183,10 @@ LOGGING = {
 # Our custom User model (replaces Django auth User)
 AUTH_USER_MODEL = 'users.User'
 
+# Default email to send notifications
+DEFAULT_FROM_EMAIL = 'no-reply@rainbowcrystalland.org'
+SERVER_EMAIL = 'errors@rainbowcrystalland.org'
+
 # User Bootstrap3 style
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
