@@ -57,4 +57,9 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^login/$', 'django.contrib.auth.views.login', name='login'),
     url(r'^admin/', include(admin.site.urls)),
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+) 
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += patterns('',
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

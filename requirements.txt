@@ -19,3 +19,5 @@ pybbm==0.15.1
 # https://pybbm.readthedocs.org/en/latest/install.html#fresh-project
 django-pure-pagination==0.2.1
 sorl-thumbnail==11.12
+# Use this command in Webfaction server:
+# pip2.7 install --install-option="--install-scripts=$PWD/bin" --install-option="--install-lib=$PWD/lib/python2.7" --allow-external postmarkup --allow-unverified postmarkup --user -r requirements.txt 
