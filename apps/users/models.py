@@ -21,7 +21,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     """
     ## FIELDS ##
     username = models.CharField(_('nickname'), max_length=64,
-        help_text=_('Fill with the words that people use to call you'), default='', 
+        help_text=_('How do people call you?'), default='', 
         blank=True)
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
@@ -34,7 +34,8 @@ class User(AbstractBaseUser, PermissionsMixin):
             'Designates whether this user should be treated as '
             'active. Unselect this instead of deleting accounts.'))
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
-    biography = models.TextField(_('biography'), blank=True)
+    biography = models.TextField(_('biography'), 
+        help_text=_('Let others know a bit about you'), blank=True)
 
     ## Managers ##
     objects = UserManager()
