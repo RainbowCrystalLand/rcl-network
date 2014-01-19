@@ -11,9 +11,8 @@ User = get_user_model()
 
 
 class CustomEmailRegistrationForm(EmailRegistrationForm):
-    username = forms.CharField(label=_('Nickname (optional)'), required=False,
-        help_text=_("If you don't set a nickname the first part of your email \
-            will be used"))
+    username = forms.CharField(label=_('Nickname'), required=True,
+        help_text=_("How do people call you?"))
 
     class Meta:
         model = User

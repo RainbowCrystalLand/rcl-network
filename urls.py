@@ -6,8 +6,8 @@ from django.conf.urls import patterns, include, url
 from django.views.generic.base import TemplateView
 from django.contrib.auth import views as auth_views
 
-from custom_registration.forms import CustomEmailRegistrationForm
-from custom_registration.backends import CustomRegistrationView
+from registration_custom.forms import CustomEmailRegistrationForm
+from registration_custom.backends import CustomRegistrationView
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
