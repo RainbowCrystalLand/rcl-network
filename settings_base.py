@@ -183,6 +183,13 @@ LOGGING = {
 # Our custom User model (replaces Django auth User)
 AUTH_USER_MODEL = 'users.User'
 
+# Fixtures folders, required for tests to run ok.
+FIXTURE_DIRS = (os.path.join(PROJECT_ROOT, "fixtures"),)
+
+# Login and logout URLs to avoid loops in url resolvers
+LOGOUT_URL = '/accounts/logout/'
+LOGIN_URL = '/login/'
+
 # Default email to send notifications
 DEFAULT_FROM_EMAIL = 'no-reply@rainbowcrystalland.org'
 SERVER_EMAIL = 'errors@rainbowcrystalland.org'
