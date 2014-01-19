@@ -21,7 +21,8 @@ class UserClassTest(TestCase):
         """
         Setups a user and tests simple User creation
         """
-        u = User(email='test@test.com', first_name='First', last_name='Last')
+        u = User(username='test', email='test@test.com', 
+            first_name='First', last_name='Last')
         u.save()
         self.user = u
 
@@ -30,6 +31,16 @@ class UserClassTest(TestCase):
         Tests that it's not possible to create Users with same email
         """
         u = User(email='test@test.com')
+        try:
+            u.save()
+        except IntegrityError:
+            pass
+
+    def test_username_not_unique(self):
+        """
+        Tests that it's possible to create Users with same username
+        """
+        u = User(username='test', email='test_other@test.com')
         try:
             u.save()
         except IntegrityError:
@@ -72,18 +83,19 @@ class UserManagerTest(TestCase):
         """
         Tests the creation of a simple user
         """
-        user = User.objects.create_user(email="t@test.com", password="test")
+        user = User.objects.create_user(username="test", email="t@test.com", 
+            password="test")
         self.assertNotEqual(user.pk, None)
 
     def test_user_creation_no_email(self):
         try:
-            User.objects.create_user(email="", password="test")
+            User.objects.create_user(username="test", email="", password="test")
         except ValueError:
             pass
 
     def test_superuser_creation(self):
         user = User.objects.create_superuser(
-            email="test@test.com", password="test")
+            username='test_superuser', email="test@test.com", password="test")
         self.assertNotEqual(user.pk, None)
 
 
@@ -92,7 +104,8 @@ class UserViewsTest(TestCase):
     This class tests all views related to the User model
     """
     def setUp(self):
-        user = User.objects.create_user(email='test@test.com', password='test')
+        user = User.objects.create_user(username='test', email='test@test.com', 
+            password='test')
         self.user = user
         self.client = Client()
         self.update_url = reverse('users:profile-edit')
@@ -100,13 +113,20 @@ class UserViewsTest(TestCase):
         self.login_url = reverse('login')
 
     def test_user_update_get_not_logged(self):
+        """
+        Tests that a not authenticated user can't access the profile update url.
+        """
         # Make the request
         response = self.client.get(self.update_url)
         # Check that redirects to corresponding url
         self.assertRedirects(response, self.login_url+'?next='+self.update_url)
 
     def test_user_update_get_logged(self):
-        self.client.login(email='test@test.com', password='test')
+        """
+        Tests that an authenticated user can access the profile update url, and that 
+        the form and the user are in the context.
+        """
+        self.client.login(username='test@test.com', password='test')
         # Make the request
         response = self.client.get(self.update_url)
         # Check response is OK
@@ -119,7 +139,11 @@ class UserViewsTest(TestCase):
         self.client.logout()
 
     def test_user_update_post_logged(self):
-        self.client.login(email='test@test.com', password='test')
+        """
+        Tests that an authenticated user can make a post request to the profile 
+        update url, and that the information is correctly updated.
+        """
+        self.client.login(username='test@test.com', password='test')
         # Prepare data and post the request
         data = {
             'first_name': 'john',
@@ -138,6 +162,11 @@ class UserViewsTest(TestCase):
         self.client.logout()
 
     def test_user_dashboard_not_logged(self):
+        """
+        Tests that a not authenticated user can't access the dashboard url and 
+        that it's redirected to the login page with the corresponding 'next' 
+        argumment.
+        """
         # Make the request
         response = self.client.get(self.dashboard_url)
         # Check that redirects to corresponding url
@@ -145,7 +174,11 @@ class UserViewsTest(TestCase):
                              self.login_url+'?next='+self.dashboard_url)
 
     def test_user_dashboard_logged(self):
-        self.client.login(email='test@test.com', password='test')
+        """
+        Tests that an authenticated user can access the dashboard url and that 
+        the template is the expected.
+        """
+        self.client.login(username='test@test.com', password='test')
         # Make the request
         response = self.client.get(self.dashboard_url)
         # Check response is OK

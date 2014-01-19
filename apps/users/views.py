@@ -5,8 +5,6 @@ from django.views.generic.edit import UpdateView
 from django.views.generic.base import TemplateView
 # forms
 from users.forms import UserUpdateForm
-# models
-from users.models import User
 # translation & other utils
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse

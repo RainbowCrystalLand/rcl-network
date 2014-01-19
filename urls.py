@@ -50,12 +50,13 @@ urlpatterns = patterns('',
     url(r'^password/reset/done/$',
         auth_views.password_reset_done,
         name='password_reset_done'),
+    url(r'^login/$', 'django.contrib.auth.views.login', name='login'),
+    
     url(r'^accounts/', include('registration_email.backends.default.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    url(r'^login/$', 'django.contrib.auth.views.login', name='login'),
     url(r'^admin/', include(admin.site.urls)),
 ) 
 if settings.DEBUG:
