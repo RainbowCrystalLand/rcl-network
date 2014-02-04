@@ -3,6 +3,10 @@ body {
 	padding-bottom: 70px;
 }
 
+.test-site-warning .alert {
+  opacity: 0.8;
+}
+
 .form-control {
 	width: 400px;
 }
@@ -19,6 +23,13 @@ body {
 	text-align: center;
 }
 
+.center {
+  text-align: center;
+}
+
+.navbar {
+  margin-bottom: 10px;
+}
 
 /********************************/
 /* Pybb extensions or overrides */
@@ -28,6 +39,17 @@ body {
 	border-top: 1px solid #C9C9C9;
 }
 
+.posts .post-header tr th {
+  padding: 2px;
+}
+
+.posts .post-header .updated {
+  font-size: 12px;
+}
+
+.posts .post .post-info {
+  width: 200px;
+}
 
 /***********************/
 /* Bootstrap overrides */
@@ -45,4 +67,17 @@ blockquote {
   padding: 10px 20px;
   margin: 0 0 10px;
   border-left: 5px solid #C9C9C9;
+}
+
+.topic .form-horizontal .form-group {
+  margin-left: 200px;
+}
+
+.topic .form-horizontal .attachments-form {
+  margin-left: 200px;
+}
+
+.topic .form-horizontal .form-group textarea {
+  max-width: 720px;
+  min-width: 720px;
 }

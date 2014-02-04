@@ -111,7 +111,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.static',
     'django.core.context_processors.i18n',
-    'pybb.context_processors.processor',
+    'pybb_custom.context_processors.processor',
 )
 
 ROOT_URLCONF = 'urls'

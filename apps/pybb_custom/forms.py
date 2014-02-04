@@ -7,7 +7,8 @@ from pybb.models import Post
 # translation & other utils
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.layout import Submit, Layout
+from pybb import util
 
 from settings import CRISPY_TEMPLATE_PACK
 
@@ -36,6 +37,10 @@ class CustomPostForm(PostForm):
 		super(CustomPostForm, self).__init__(*args, **kwargs)
 		self.helper = Bootstrap3HorizontalHelper(self)
 		self.helper.template = '%s/uni_form.html' % CRISPY_TEMPLATE_PACK
+		self.helper.layout = Layout(
+		    'name',
+		    'body',
+		)
 
 	class Meta(object):
 		model = Post
@@ -48,3 +53,7 @@ class CustomEditProfileForm(EditProfileForm):
 		self.helper = Bootstrap3HorizontalHelper(self)
 		self.helper.template = '%s/uni_form.html' % CRISPY_TEMPLATE_PACK
 		self.helper.add_input(Submit('save', _('Save')))
+
+	class Meta(object):
+            model = util.get_pybb_profile_model()
+            fields = ['avatar', 'signature', 'show_signatures']

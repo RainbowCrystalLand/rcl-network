@@ -4,12 +4,17 @@
 {% block title%}{% trans "RCL" %} - {% trans "Welcome Home" %}{% endblock %}
 
 {% block content %}
+		<br>
+		<p>
+			{% blocktrans %}
+	    	Rainbow Crystal Land (RCL) is a global self-sufficient network of open and ownerless lands housing sustainable communities of free and equal individuals living in peace and harmony with the earth. RCL is an organically living and growing common vision shared by thousands of people around the world; it is not an organization or a set of rules and there is no central leadership. RCL is a social movement offering a complete alternative living solution for everyone. There are many similar visions, communities and networks out there - RCL competes with no one and co-operates with everyone.
+			{% endblocktrans %}
+		</p>
 
 		<p>
-		{% blocktrans %}
-    	Rainbow Crystal Land (RCL) is a global self-sufficient network of open and ownerless lands housing sustainable communities of free and equal individuals living in peace and harmony with the earth. RCL is an organically living and growing common vision shared by thousands of people around the world; it is not an organization or a set of rules and there is no central leadership. RCL is a social movement offering a complete alternative living solution for everyone. There are many similar visions, communities and networks out there - RCL competes with no one and co-operates with everyone.
-		RCL is unique because:
-		{% endblocktrans %}
+			{% blocktrans %}
+			RCL is unique because:
+			{% endblocktrans %}
 		</p>
 
 		<ul>
@@ -20,6 +25,7 @@
 			<li>{% trans "We intend <strong>not to use money</strong> as a means of exchange inside and between our communities and to freely share what we don’t need with our neighbour." %}</li>
 		</ul>
 
+		<br>
 		{% url 'rcl:main-join' as join_url %}
 		<p><strong>{% blocktrans %}Come <a href='{{ join_url }}'>join us</a>! Welcome home!{% endblocktrans %}</strong></p>
 

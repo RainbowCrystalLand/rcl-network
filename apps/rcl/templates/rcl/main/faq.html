@@ -1,18 +1,19 @@
 {% extends "rcl/main/base.html" %}
 {% load i18n %}
 
-{% block title%}{% trans "RCL" %} - {% trans "History" %}{% endblock %}
+{% block title%}{% trans "RCL" %} - {% trans "FAQ" %}{% endblock %}
 
 {% block content %}
+	<h2>{% trans "FAQ" %}</h2>
 
     {% blocktrans %}
-        The history of RCLs.
+        Coming soon. Please refer to the "FAQ" forum to provide ideas/feedback.
     {% endblocktrans %}
 
 {% endblock %}
 
 {% block extra_script %}
 <script type="text/javascript">
-    $('#menu-vision').addClass('active');
+    $('#menu-faq').addClass('active');
 </script>
 {% endblock %}

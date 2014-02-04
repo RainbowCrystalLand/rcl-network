@@ -1,0 +1,27 @@
+{% load pybb_tags %}
+
+{% if request.user|pybb_may_attach_files %}
+    {% load i18n crispy_forms_tags crispy_forms_field %}
+    <div class='attachments-form'>
+        <label for="id_attachments" class="control-label">
+                {% blocktrans with max_size=PYBB_ATTACHMENT_SIZE_LIMIT_MB %} Attachment (max. size {{ max_size }}MB)
+                {% endblocktrans %}</label>
+        {{ aformset.management_form }}
+
+            <table>
+            {% for form in aformset %}
+                {% if form.file.errors %}
+                    {% for e in form.file.errors %}
+                    <div class="alert alert-block alert-warning">
+                        {{ e }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                <tr>
+                    <td>{{ form.id }} {{ form.file }}</td>
+                    <td>{% if form.instance.pk %}{{ form.DELETE }} {% trans "delete" %}{% endif %}</td>
+                </tr>
+            {% endfor %}
+            </table>
+    </div>
+{% endif %}

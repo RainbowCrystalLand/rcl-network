@@ -7,7 +7,7 @@
 {% block title %}{% trans "Profile editing" %}{% endblock title %}
 
 {% block content %}
-    <h1>{% trans "Profile editing" %}</h1>
+    <h1>{% trans "Forum Settings" %}</h1>
     {% include 'pybb/avatar.html' with user=user %}
     <form method="post" enctype="multipart/form-data" class="profile-edit">
         {% csrf_token %}
@@ -22,7 +22,7 @@
                 {% pybb_link sub %}
                 &mdash;
                 <strong>
-                    <a href="{% url 'pybb:delete_subscription' sub.id %}">{% trans "delete" %}</a>
+                    <a href="{% url 'pybb:delete_subscription' sub.id %}" title="{% trans 'Remove' %}"><span class="glyphicon glyphicon-remove"></span></a>
                 </strong>
             </li>
         {% endfor %}

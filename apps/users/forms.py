@@ -8,4 +8,4 @@ from users.models import User
 class UserUpdateForm(ModelForm):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'biography')
+        fields = ('username', 'biography')
