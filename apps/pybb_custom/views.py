@@ -6,11 +6,14 @@ from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 # Pybb stuff
-from pybb.views import AddPostView
+from pybb.views import AddPostView, ProfileEditView
 from pybb.permissions import perms
 from pybb.models import Forum, Topic, Post
 from pybb import defaults
 from pybb import util
+from pybb.forms import AdminPostForm
+# Others
+from pybb_custom.forms import CustomEditProfileForm, CustomPostForm
 
 # Get User model and username field
 User = util.get_user_model()
@@ -18,6 +21,12 @@ username_field = util.get_username_field()
 
 
 class CustomAddPostView(AddPostView):
+    def get_form_class(self):
+        if perms.may_post_as_admin(self.request.user):
+            return AdminPostForm
+        else:
+            return CustomPostForm
+
     @method_decorator(csrf_protect)
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated():
@@ -54,3 +63,9 @@ class CustomAddPostView(AddPostView):
                 if self.quote and request.is_ajax():
                     return HttpResponse(self.quote)
         return super(AddPostView, self).dispatch(request, *args, **kwargs)
+
+
+class CustomProfileEditView(ProfileEditView):
+    def get_form_class(self):
+        return CustomEditProfileForm
+

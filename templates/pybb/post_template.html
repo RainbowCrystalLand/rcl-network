@@ -5,11 +5,11 @@
 {% pybb_get_profile user=user as user_profile %}
 
 <a name="post-{{ post.id }}"></a> {# may be remove this string? #}
-<table class="table table-bordered post {% if post.on_moderation %}on-moderation{% endif %} {% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}" id="post-{{ post.id }}">
+<table class="table table-bordered {% if post.on_moderation %}on-moderation{% endif %} {% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %} post" id="post-{{ post.id }}">
     <thead class="post-header">
     <tr>
     <th colspan="2">
-        <a class="permalink" href="{{ post.get_absolute_url }}">#</a>
+        <a class="permalink" href="{{ post.get_absolute_url }}" title="{% trans 'permalink' %}"><span class="glyphicon glyphicon-link"></span></a>
         <span class="updated">{% pybb_time post.created %}</span>
     </th>
     </tr>
@@ -35,7 +35,7 @@
 
             <div class="post-controls">
                 {% if user.is_moderator or post|pybb_posted_by:user %}
-                    <a href="{% url 'pybb:edit_post' pk=post.id %}">{% trans "Edit Post" %}</a>
+                    <a href="{% url 'pybb:edit_post' pk=post.id %}"><button type="button" class="btn btn-xs btn-default">{% trans "Edit Post" %}</button></a>
                 {% endif %}
                 {% if user.is_moderator %}
                     <a onclick="pybb_delete_post('{% url 'pybb:delete_post' post.id %}',

@@ -8,11 +8,11 @@ except ImportError:
 
 from django.contrib.auth.decorators import login_required
 
-from pybb_custom.views import CustomAddPostView
+from pybb_custom.views import CustomAddPostView, CustomProfileEditView
 
 from pybb.feeds import LastPosts, LastTopics
 from pybb.views import IndexView, CategoryView, ForumView, TopicView,\
-    EditPostView, UserView, PostView, ProfileEditView,\
+    EditPostView, UserView, PostView, \
     DeletePostView, StickTopicView, UnstickTopicView, CloseTopicView,\
     OpenTopicView, ModeratePost, TopicPollVoteView, LatestTopicsView,\
     UserTopics, UserPosts, topic_cancel_poll_vote
@@ -38,7 +38,7 @@ urlpatterns += patterns('pybb.views',
                         url(r'^users/(?P<username>[^/]+)/posts/$', login_required(UserPosts.as_view()), name='user_posts'),
 
                         # Profile
-                        url('^profile/edit/$', login_required(ProfileEditView.as_view()), name='edit_profile'),
+                        url('^profile/edit/$', login_required(CustomProfileEditView.as_view()), name='edit_profile'),
 
                         # Topic
                         url('^topic/(?P<pk>\d+)/$', login_required(TopicView.as_view()), name='topic'),
